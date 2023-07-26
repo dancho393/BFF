@@ -22,6 +22,16 @@
             <artifactId>domain</artifactId>
             <version>${revision}</version>
         </dependency>
+        <dependency>
+            <groupId>com.example.bff</groupId>
+            <artifactId>core</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.example.bff</groupId>
+            <artifactId>api</artifactId>
+            <version>${revision}</version>
+        </dependency>
     </dependencies>
     <build>
         <finalName>StorageServiceApplication</finalName>
@@ -31,7 +41,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.example.bff.BffApplication</mainClass>
+                    <mainClass>com.example.bff.rest.BffApplication</mainClass>
                 </configuration>
                 <executions>
                     <execution>
