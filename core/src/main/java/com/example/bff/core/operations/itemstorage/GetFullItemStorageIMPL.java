@@ -1,7 +1,7 @@
 package com.example.bff.core.operations.itemstorage;
 import com.example.bff.api.operation.fullitemstorage.get.GetFullItemStorageRequest;
 import com.example.bff.api.operation.fullitemstorage.get.GetFullItemStorageResponse;
-import com.example.bff.api.operation.fullitemstorage.get.GetFullItemStorageService;
+import com.example.bff.api.operation.fullitemstorage.get.GetFullItemStorageOperation;
 import com.example.storageservice.api.api.operations.itemStorage.get.GetItemStorageResponse;
 import com.example.storageservice.restexport.StorageServiceRestClient;
 import com.example.zoostore.api.operations.item.get.GetItemResponse;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class GetFullItemStorageIMPL implements GetFullItemStorageService {
+public class GetFullItemStorageIMPL implements GetFullItemStorageOperation {
 
     private final StorageServiceRestClient storageServiceRestClient;
     private final ZooStoreRestClient zooStoreRestClient;
