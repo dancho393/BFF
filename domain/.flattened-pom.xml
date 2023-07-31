@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.example.bff</groupId>
   <artifactId>domain</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.0.2-SNAPSHOT</version>
   <licenses>
     <license>
       <name>Apache License, Version 2.0</name>
@@ -55,12 +55,23 @@
       <scope>compile</scope>
       <optional>true</optional>
     </dependency>
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-core</artifactId>
+      <version>6.1.2</version>
+      <scope>compile</scope>
+    </dependency>
   </dependencies>
   <repositories>
     <repository>
       <id>zoostore</id>
       <name>ZooStore</name>
       <url>file://C:/Users/user/.m2/repository/com/example/ZooStore</url>
+    </repository>
+    <repository>
+      <id>storageservice</id>
+      <name>StorageService</name>
+      <url>file://C:/Users/user/.m2/repository/com/example/storageservice</url>
     </repository>
   </repositories>
 </project>

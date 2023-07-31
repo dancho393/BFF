@@ -4,6 +4,8 @@ import com.example.bff.api.operation.fullitemstorage.get.GetFullItemStorageReque
 import com.example.bff.api.operation.fullitemstorage.get.GetFullItemStorageOperation;
 import com.example.bff.api.operation.item.getallbytag.GetAllItemByTagRequest;
 import com.example.bff.api.operation.item.getallbytag.GetAllItemsByTagOperation;
+import com.example.bff.core.operations.item.GetAllItemsByTagIMPL;
+import com.example.bff.core.operations.itemstorage.GetFullItemStorageIMPL;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,11 +14,11 @@ import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/fullItemStorages")
-public class FullItemStorageController {
+@RequestMapping("/api/v1/auth/fullItemStorages")
+public class BFFController {
 
-    private final GetFullItemStorageOperation getFullItemStorage;
-    private final GetAllItemsByTagOperation getAllItemsByTagOperation;
+    private final GetFullItemStorageIMPL getFullItemStorage;
+    private final GetAllItemsByTagIMPL getAllItemsByTagOperation;
     @GetMapping("/{id}")
     public ResponseEntity get(@PathVariable String id){
 
@@ -25,7 +27,7 @@ public class FullItemStorageController {
                 .itemStorageId(UUID.fromString(id))
                 .build()));
     }
-    @GetMapping("/byTag")
+    @GetMapping("/FullItembyTag")
     public ResponseEntity getByTag(@RequestBody GetAllItemByTagRequest tag){
 
         return ResponseEntity.ok(getAllItemsByTagOperation.process(tag));

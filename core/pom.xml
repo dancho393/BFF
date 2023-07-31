@@ -12,6 +12,7 @@
     <groupId>com.example.bff</groupId>
     <artifactId>core</artifactId>
     <version>${revision}</version>
+
     <dependencies>
         <dependency>
             <groupId>com.example.bff</groupId>
@@ -22,6 +23,22 @@
             <groupId>com.example.bff</groupId>
             <artifactId>domain</artifactId>
             <version>${revision}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.example.bff</groupId>
+            <artifactId>persistence</artifactId>
+            <version>${revision}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-api</artifactId>
+            <version>0.11.5</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
         </dependency>
     </dependencies>
 
