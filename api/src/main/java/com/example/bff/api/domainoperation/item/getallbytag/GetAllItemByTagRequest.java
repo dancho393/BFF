@@ -1,9 +1,8 @@
-package com.example.bff.api.operation.item.getallbytag;
+package com.example.bff.api.domainoperation.item.getallbytag;
 
 import com.example.bff.api.base.OperationRequest;
 import lombok.*;
 
-import java.awt.print.Pageable;
 import java.util.UUID;
 
 @Getter

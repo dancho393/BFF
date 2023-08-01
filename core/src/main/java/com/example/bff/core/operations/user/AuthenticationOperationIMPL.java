@@ -1,10 +1,9 @@
 package com.example.bff.core.operations.user;
 
-import com.example.bff.api.users.operations.user.authenticate.AuthenticationOperation;
-import com.example.bff.api.users.operations.user.authenticate.AuthenticationRequest;
-import com.example.bff.api.users.operations.user.authenticate.AuthenticationResponse;
+import com.example.bff.api.operation.user.authenticate.AuthenticationOperation;
+import com.example.bff.api.operation.user.authenticate.AuthenticationRequest;
+import com.example.bff.api.operation.user.authenticate.AuthenticationResponse;
 import com.example.bff.core.operations.jwt.JwtService;
-import com.example.bff.persistence.entities.User;
 import com.example.bff.persistence.repositories.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -27,7 +26,7 @@ public class AuthenticationOperationIMPL implements AuthenticationOperation {
                 )
         );
         var user = userRepository.findByEmail(request.getEmail())
-                .orElseThrow();
+                .orElseThrow(()->new RuntimeException("User Not Found"));
         var jwtToken =jwtService.generateToken(user);
         return AuthenticationResponse
                 .builder()

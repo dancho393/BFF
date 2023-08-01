@@ -2,6 +2,7 @@ package com.example.bff.rest.config;
 
 import com.example.bff.persistence.repositories.UserRepository;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -13,14 +14,14 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class ApplicationConfig {
 
     private final UserRepository userRepository;
     @Bean
     public UserDetailsService userDetailsService(){
         return  username -> userRepository.findByEmail(username)
-                .orElseThrow(()-> new RuntimeException(""));
+                .orElseThrow(()-> new RuntimeException("User Not Found"));
     }
     @Bean
     public AuthenticationProvider authenticationProvider(){

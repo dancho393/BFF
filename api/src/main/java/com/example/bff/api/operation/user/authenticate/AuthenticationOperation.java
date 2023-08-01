@@ -1,4 +1,4 @@
-package com.example.bff.api.users.operations.user.authenticate;
+package com.example.bff.api.operation.user.authenticate;
 
 import com.example.bff.api.base.Operation;
 

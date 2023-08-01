@@ -1,4 +1,4 @@
-package com.example.bff.api.operation.fullitemstorage.get;
+package com.example.bff.api.domainoperation.fullitemstorage.get;
 
 import com.example.bff.api.base.OperationResponse;
 import lombok.*;

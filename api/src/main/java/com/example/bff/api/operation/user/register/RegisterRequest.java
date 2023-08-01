@@ -1,4 +1,4 @@
-package com.example.bff.api.users.operations.user.register;
+package com.example.bff.api.operation.user.register;
 
 import com.example.bff.api.base.OperationRequest;
 import lombok.*;

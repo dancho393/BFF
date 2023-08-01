@@ -1,9 +1,7 @@
 package com.example.bff.rest.controllers;
 
-import com.example.bff.api.operation.fullitemstorage.get.GetFullItemStorageRequest;
-import com.example.bff.api.operation.fullitemstorage.get.GetFullItemStorageOperation;
-import com.example.bff.api.operation.item.getallbytag.GetAllItemByTagRequest;
-import com.example.bff.api.operation.item.getallbytag.GetAllItemsByTagOperation;
+import com.example.bff.api.domainoperation.fullitemstorage.get.GetFullItemStorageRequest;
+import com.example.bff.api.domainoperation.item.getallbytag.GetAllItemByTagRequest;
 import com.example.bff.core.operations.item.GetAllItemsByTagIMPL;
 import com.example.bff.core.operations.itemstorage.GetFullItemStorageIMPL;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +12,7 @@ import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/auth/fullItemStorages")
+@RequestMapping("/api/v1/fullItemStorages")
 public class BFFController {
 
     private final GetFullItemStorageIMPL getFullItemStorage;

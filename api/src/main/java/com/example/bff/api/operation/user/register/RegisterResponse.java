@@ -1,4 +1,4 @@
-package com.example.bff.api.users.operations.user.authenticate;
+package com.example.bff.api.operation.user.register;
 
 import com.example.bff.api.base.OperationResponse;
 import lombok.*;
@@ -8,6 +8,6 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class AuthenticationResponse implements OperationResponse {
+public class RegisterResponse implements OperationResponse {
     private String token;
 }
