@@ -6,7 +6,6 @@ import com.example.bff.api.operation.user.register.RegisterRequest;
 import com.example.bff.api.operation.user.register.RegisterResponse;
 import com.example.bff.core.operations.jwt.JwtService;
 import com.example.bff.persistence.entities.Cart;
-import com.example.bff.persistence.entities.ItemQuantity;
 import com.example.bff.persistence.entities.User;
 import com.example.bff.persistence.enums.Role;
 import com.example.bff.persistence.repositories.CartRepository;
@@ -16,6 +15,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.HashSet;
 
 @Service
@@ -29,7 +29,7 @@ public class RegisterOperationIMPL implements RegisterOperation {
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();//To be Deleted and should be autowired
         Cart cart = Cart
                 .builder()
-                .items(new HashSet<ItemQuantity>())
+                .items(new HashMap<>())
                 .totalPrice(0.0f)
                 .build();
         cartRepository.save(cart);

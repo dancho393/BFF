@@ -1,4 +1,4 @@
-package com.example.bff.api.operation.cart.addItem;
+package com.example.bff.api.operation.cart.additem;
 
 import com.example.bff.api.base.Operation;
 

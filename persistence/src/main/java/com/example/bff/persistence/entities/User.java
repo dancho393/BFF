@@ -33,10 +33,12 @@ public class User implements UserDetails {
     @Column
     private String phoneNumber;
     @Column
+    private Float cardBalance=0.0f;
+    @Column
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "cart_id",referencedColumnName = "id")
     private Cart cart;
     @Override

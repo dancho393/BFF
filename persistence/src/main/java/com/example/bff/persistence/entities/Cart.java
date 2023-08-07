@@ -2,7 +2,9 @@ package com.example.bff.persistence.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.beans.factory.annotation.Value;
 
+import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
@@ -22,9 +24,9 @@ public class Cart {
     @OneToOne(mappedBy = "cart")
     private User user;
 
-    @OneToMany(mappedBy = "cart")
-    private Set<ItemQuantity> items;
+    @ElementCollection
+    private Map<UUID,Integer> items;
 
-    private Float totalPrice;
+    private Float totalPrice=0.0f;
 
 }
