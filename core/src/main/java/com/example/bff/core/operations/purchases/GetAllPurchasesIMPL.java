@@ -3,8 +3,6 @@ package com.example.bff.core.operations.purchases;
 import com.example.bff.api.operation.purchases.getall.GetAllPurchasesOperation;
 import com.example.bff.api.operation.purchases.getall.GetAllPurchasesRequest;
 import com.example.bff.api.operation.purchases.getall.GetAllPurchasesResponse;
-import com.example.storageservice.api.api.operations.purchase.getAll.GetAllPurchase;
-import com.example.storageservice.api.api.operations.purchase.getAll.GetAllRequest;
 import com.example.storageservice.api.api.operations.purchase.getAll.GetAllResponse;
 import com.example.storageservice.restexport.StorageServiceRestClient;
 import lombok.AllArgsConstructor;

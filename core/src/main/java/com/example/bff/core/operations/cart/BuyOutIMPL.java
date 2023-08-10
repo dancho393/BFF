@@ -4,9 +4,7 @@ import com.example.bff.api.operation.cart.buyout.BuyOutOperation;
 import com.example.bff.api.operation.cart.buyout.BuyOutRequest;
 import com.example.bff.api.operation.cart.buyout.BuyOutResponse;
 import com.example.bff.core.operations.exceptions.UserNotFoundException;
-import com.example.bff.persistence.entities.Cart;
 import com.example.bff.persistence.entities.User;
-import com.example.bff.persistence.repositories.CartRepository;
 import com.example.bff.persistence.repositories.UserRepository;
 import com.example.storageservice.api.api.operations.purchase.create.CreatePurchaseRequest;
 import com.example.storageservice.api.api.operations.purchase.create.CreatePurchaseResponse;
@@ -44,6 +42,11 @@ public class BuyOutIMPL implements BuyOutOperation {
         return BuyOutResponse.builder()
                 .response("Purchased:"+createPurchaseResponse.getSuccessful())
                 .build();
+    }
+
+    private Float promotion(){
+
+        return null;
     }
 
 }

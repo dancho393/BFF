@@ -2,10 +2,8 @@ package com.example.bff.persistence.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.beans.factory.annotation.Value;
 
 import java.util.Map;
-import java.util.Set;
 import java.util.UUID;
 
 @Getter

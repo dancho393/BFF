@@ -7,7 +7,6 @@ import com.example.bff.core.operations.exceptions.UserNotFoundException;
 import com.example.bff.persistence.entities.User;
 import com.example.bff.persistence.repositories.UserRepository;
 import lombok.AllArgsConstructor;
-import lombok.Setter;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 

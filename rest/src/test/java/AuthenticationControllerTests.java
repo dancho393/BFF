@@ -1,28 +1,22 @@
-
 import com.example.bff.api.operation.user.register.RegisterRequest;
 import com.example.bff.persistence.entities.User;
 import com.example.bff.persistence.repositories.UserRepository;
 import com.example.bff.rest.BffApplication;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import org.junit.Test;
-
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
 
@@ -30,7 +24,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 @SpringBootTest(classes = BffApplication.class)
 @AutoConfigureMockMvc(addFilters = false)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-public class Tests {
+public class AuthenticationControllerTests {
     @Autowired
     private  MockMvc mockMvc;
 
@@ -44,7 +38,7 @@ public class Tests {
     @BeforeEach
     void setUp() {
         user = User.builder()
-                .email("dancho123@abv.bg")
+                .email("dancho1235@abv.bg")
                 .password("pass")
                 .firstName("dancho")
                 .lastName("danchov")
@@ -80,7 +74,6 @@ public class Tests {
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON));
-
     }
 
 

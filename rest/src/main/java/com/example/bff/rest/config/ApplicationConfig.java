@@ -2,7 +2,6 @@ package com.example.bff.rest.config;
 
 import com.example.bff.core.operations.exceptions.UserNotFoundException;
 import com.example.bff.persistence.repositories.UserRepository;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

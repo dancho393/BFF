@@ -3,7 +3,6 @@ package com.example.bff.core.operations.item;
 import com.example.bff.api.domainoperation.item.getkeyword.GetByKeyWordOperation;
 import com.example.bff.api.domainoperation.item.getkeyword.GetByKeyWordRequest;
 import com.example.bff.api.domainoperation.item.getkeyword.GetByKeyWordResponse;
-import com.example.zoostore.api.operations.item.findbyregex.FindByRegexRequest;
 import com.example.zoostore.restexport.ZooStoreRestClient;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

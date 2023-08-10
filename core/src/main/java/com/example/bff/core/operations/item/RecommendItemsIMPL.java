@@ -11,7 +11,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import java.util.UUID;
 
 @Service
 @AllArgsConstructor
@@ -24,7 +23,9 @@ public class RecommendItemsIMPL implements RecommendItemsOperation {
                 .findByEmail(SecurityContextHolder
                         .getContext()
                         .getAuthentication()
-                        .getName()).orElseThrow(()->new UserNotFoundException("User Not Found"));
+                        .getName())
+                .orElseThrow(()->new UserNotFoundException("User Not Found"));
+
         return RecommendItemsResponse.builder()
                 .items(
                         storageServiceRestClient.recommend(user.getId().toString(),
