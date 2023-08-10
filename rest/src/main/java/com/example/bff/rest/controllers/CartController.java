@@ -13,6 +13,7 @@ import com.example.bff.api.operation.cart.removeItem.RemoveItemResponse;
 import com.example.bff.core.operations.cart.*;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
@@ -44,6 +45,7 @@ public class CartController {
     }
     @PatchMapping("/renew")
     public ResponseEntity<DeleteCartResponse> renew(@RequestBody DeleteCartRequest request){
+        request.setUserName(SecurityContextHolder.getContext().getAuthentication().getName());
         return ResponseEntity.ok(deleteCart.process(request));
     }
     @PostMapping("/purchase")

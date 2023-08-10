@@ -1,5 +1,4 @@
 package com.example.bff.rest.controllers;
-
 import com.example.bff.api.operation.user.authenticate.AuthenticationRequest;
 import com.example.bff.api.operation.user.authenticate.AuthenticationResponse;
 import com.example.bff.api.operation.user.register.RegisterRequest;
@@ -8,10 +7,8 @@ import com.example.bff.core.operations.user.AuthenticationOperationIMPL;
 import com.example.bff.core.operations.user.RegisterOperationIMPL;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
-
 @RestController
 @AllArgsConstructor
 @RequestMapping("/api/v1/auth")

@@ -4,6 +4,7 @@ import com.example.bff.api.operation.cart.getitems.GItemResponse;
 import com.example.bff.api.operation.cart.getitems.GetItemsOperation;
 import com.example.bff.api.operation.cart.getitems.GetItemsRequest;
 import com.example.bff.api.operation.cart.getitems.GetItemsResponse;
+import com.example.bff.core.operations.exceptions.UserNotFoundException;
 import com.example.bff.persistence.entities.User;
 import com.example.bff.persistence.repositories.UserRepository;
 import com.example.storageservice.api.api.operations.itemStorage.getByItemId.GetByItemResponse;
@@ -25,7 +26,7 @@ public class GetItemsIMPL implements GetItemsOperation {
     @Override
     public GetItemsResponse process(GetItemsRequest request) {
         User userEntity =userRepository.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName())
-                .orElseThrow(()->new RuntimeException("Not Found User"));
+                .orElseThrow(()->new UserNotFoundException("Not Found User"));
         ArrayList<GItemResponse> items =new ArrayList<>();
 
         userEntity.getCart().getItems().entrySet()

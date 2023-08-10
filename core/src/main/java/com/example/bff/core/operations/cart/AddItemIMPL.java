@@ -3,6 +3,7 @@ package com.example.bff.core.operations.cart;
 import com.example.bff.api.operation.cart.additem.AddItemOperation;
 import com.example.bff.api.operation.cart.additem.AddItemRequest;
 import com.example.bff.api.operation.cart.additem.AddItemResponse;
+import com.example.bff.core.operations.exceptions.UserNotFoundException;
 import com.example.bff.persistence.entities.User;
 import com.example.bff.persistence.repositories.CartRepository;
 import com.example.bff.persistence.repositories.UserRepository;
@@ -30,7 +31,7 @@ public class AddItemIMPL implements AddItemOperation {
                         .getContext()
                         .getAuthentication()
                         .getName())
-                .orElseThrow(()-> new RuntimeException("User Not Found"));
+                .orElseThrow(()-> new UserNotFoundException("User Not Found"));
         userEntity.getCart().getItems().entrySet().stream()
                 .filter(entry -> entry.getKey().equals(request.getItemId()))
                 .findFirst()

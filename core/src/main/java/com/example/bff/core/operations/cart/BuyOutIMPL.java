@@ -3,6 +3,7 @@ package com.example.bff.core.operations.cart;
 import com.example.bff.api.operation.cart.buyout.BuyOutOperation;
 import com.example.bff.api.operation.cart.buyout.BuyOutRequest;
 import com.example.bff.api.operation.cart.buyout.BuyOutResponse;
+import com.example.bff.core.operations.exceptions.UserNotFoundException;
 import com.example.bff.persistence.entities.Cart;
 import com.example.bff.persistence.entities.User;
 import com.example.bff.persistence.repositories.CartRepository;
@@ -22,7 +23,7 @@ public class BuyOutIMPL implements BuyOutOperation {
     @Override
     public BuyOutResponse process(BuyOutRequest request) {
         User user = userRepository.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName())
-                .orElseThrow(()->new RuntimeException("User Not Found"));
+                .orElseThrow(()->new UserNotFoundException("User Not Found"));
 
         CreatePurchaseRequest createPurchaseRequest= CreatePurchaseRequest.builder()
                 .items(user.getCart().getItems())

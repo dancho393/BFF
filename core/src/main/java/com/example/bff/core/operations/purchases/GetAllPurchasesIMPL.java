@@ -18,6 +18,7 @@ public class GetAllPurchasesIMPL implements GetAllPurchasesOperation {
     public GetAllPurchasesResponse process(GetAllPurchasesRequest request) {
         GetAllResponse response=storageServiceRestClient.getAllPurchase(request.getPage());
 
+
         return GetAllPurchasesResponse.builder()
                 .purchases(response.getPurchaseList())
                 .build();

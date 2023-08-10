@@ -11,6 +11,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class GetAllItemsByTagResponse implements OperationResponse {
+    private String tagName;
     private List items;
 
 

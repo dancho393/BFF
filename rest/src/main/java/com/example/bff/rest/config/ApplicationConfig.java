@@ -1,5 +1,6 @@
 package com.example.bff.rest.config;
 
+import com.example.bff.core.operations.exceptions.UserNotFoundException;
 import com.example.bff.persistence.repositories.UserRepository;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +22,7 @@ public class ApplicationConfig {
     @Bean
     public UserDetailsService userDetailsService(){
         return  username -> userRepository.findByEmail(username)
-                .orElseThrow(()-> new RuntimeException("User Not Found"));
+                .orElseThrow(()-> new UserNotFoundException("User Not Found"));
     }
     @Bean
     public AuthenticationProvider authenticationProvider(){

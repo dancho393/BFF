@@ -4,6 +4,7 @@ import com.example.bff.api.operation.cart.deletecart.DeleteCartOperation;
 import com.example.bff.api.operation.cart.deletecart.DeleteCartRequest;
 import com.example.bff.api.operation.cart.deletecart.DeleteCartResponse;
 import com.example.bff.api.operation.cart.removeItem.RemoveItemOperation;
+import com.example.bff.core.operations.exceptions.UserNotFoundException;
 import com.example.bff.persistence.entities.Cart;
 import com.example.bff.persistence.entities.User;
 import com.example.bff.persistence.repositories.CartRepository;
@@ -28,8 +29,8 @@ public class DeleteCartIMPL implements DeleteCartOperation {
     @Override
     @Transactional
     public DeleteCartResponse process(DeleteCartRequest request) {
-        User user = userRepository.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName())
-                .orElseThrow(() -> new RuntimeException("User Not Found"));
+        User user = userRepository.findByEmail(request.getUserName())
+                .orElseThrow(() -> new UserNotFoundException("User Not Found"));
 
         user.getCart().getItems().clear();
         user.getCart().setTotalPrice(0.0f);

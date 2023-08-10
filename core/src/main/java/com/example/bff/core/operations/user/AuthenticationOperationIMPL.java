@@ -3,6 +3,7 @@ package com.example.bff.core.operations.user;
 import com.example.bff.api.operation.user.authenticate.AuthenticationOperation;
 import com.example.bff.api.operation.user.authenticate.AuthenticationRequest;
 import com.example.bff.api.operation.user.authenticate.AuthenticationResponse;
+import com.example.bff.core.operations.exceptions.UserNotFoundException;
 import com.example.bff.core.operations.jwt.JwtService;
 import com.example.bff.persistence.repositories.UserRepository;
 import lombok.AllArgsConstructor;
@@ -26,7 +27,7 @@ public class AuthenticationOperationIMPL implements AuthenticationOperation {
                 )
         );
         var user = userRepository.findByEmail(request.getEmail())
-                .orElseThrow(()->new RuntimeException("User Not Found"));
+                .orElseThrow(()->new UserNotFoundException("User Not Found"));
         var jwtToken =jwtService.generateToken(user);
         return AuthenticationResponse
                 .builder()
