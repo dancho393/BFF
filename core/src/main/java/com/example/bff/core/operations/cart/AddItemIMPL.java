@@ -24,14 +24,13 @@ public class AddItemIMPL implements AddItemOperation {
 
           GetByItemResponse response=  storageServiceRestClient.getStorageById(request.getItemId().toString());
           if(response.getPrice()==0&& response.getQuantity()==0)
-           throw new RuntimeException("Item Not Found");
-          if(response.getQuantity()-response.getQuantity()<0)
-             throw new RuntimeException("Quantity in storage is not enough");
+           throw new UserNotFoundException("Item Not Found");
         User userEntity=userRepository.findByEmail(SecurityContextHolder
                         .getContext()
                         .getAuthentication()
                         .getName())
                 .orElseThrow(()-> new UserNotFoundException("User Not Found"));
+
         userEntity.getCart().getItems().entrySet().stream()
                 .filter(entry -> entry.getKey().equals(request.getItemId()))
                 .findFirst()

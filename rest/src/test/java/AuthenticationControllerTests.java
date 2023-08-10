@@ -5,6 +5,8 @@ import com.example.bff.rest.BffApplication;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayNameGeneration;
+import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -32,7 +34,6 @@ public class AuthenticationControllerTests {
     private ObjectMapper objectMapper;
     @Autowired
     private UserRepository userRepository;
-
     private User user;
 
     @BeforeEach
