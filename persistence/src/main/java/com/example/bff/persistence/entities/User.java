@@ -37,6 +37,10 @@ public class User implements UserDetails {
     @Column
     @Enumerated(EnumType.STRING)
     private Role role;
+    @Column
+    private String verificationCode;
+    @Column
+    private Boolean isEmailVerified=false;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "cart_id",referencedColumnName = "id")
@@ -73,6 +77,6 @@ public class User implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return isEmailVerified;
     }
 }
