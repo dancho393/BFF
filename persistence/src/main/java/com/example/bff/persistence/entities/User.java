@@ -1,6 +1,6 @@
 package com.example.bff.persistence.entities;
 
-import com.example.bff.persistence.enums.Role;
+import com.example.bff.persistence.enums.roles.Role;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -45,6 +45,9 @@ public class User implements UserDetails {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "cart_id",referencedColumnName = "id")
     private Cart cart;
+    @Column
+    private int discountPoints=0;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(role.name()));

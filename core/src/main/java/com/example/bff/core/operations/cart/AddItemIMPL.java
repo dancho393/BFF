@@ -25,13 +25,13 @@ public class AddItemIMPL implements AddItemOperation {
           GetByItemResponse response=  storageServiceRestClient.getStorageById(request.getItemId().toString());
           if(response.getPrice()==0&& response.getQuantity()==0)
            throw new UserNotFoundException("Item Not Found");
-        User userEntity=userRepository.findByEmail(SecurityContextHolder
+          User userEntity=userRepository.findByEmail(SecurityContextHolder
                         .getContext()
                         .getAuthentication()
                         .getName())
                 .orElseThrow(()-> new UserNotFoundException("User Not Found"));
 
-        userEntity.getCart().getItems().entrySet().stream()
+          userEntity.getCart().getItems().entrySet().stream()
                 .filter(entry -> entry.getKey().equals(request.getItemId()))
                 .findFirst()
                 .ifPresentOrElse(
@@ -43,14 +43,14 @@ public class AddItemIMPL implements AddItemOperation {
                         }
                 );
 
-        userEntity.getCart().setTotalPrice(userEntity
+          userEntity.getCart().setTotalPrice(userEntity
                 .getCart()
                 .getTotalPrice()+(response.getPrice() * request.getQuantity()));
 
-        cartRepository.save(userEntity.getCart());
+          cartRepository.save(userEntity.getCart());
 
-        userRepository.save(userEntity);
-        return AddItemResponse
+          userRepository.save(userEntity);
+          return AddItemResponse
                 .builder()
                 .fullName(userEntity.getFirstName()+" "+userEntity.getLastName())
                 .items(userEntity.getCart().getItems())

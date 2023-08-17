@@ -9,7 +9,7 @@ import com.example.bff.api.operation.user.register.RegisterResponse;
 import com.example.bff.core.operations.jwt.JwtService;
 import com.example.bff.persistence.entities.Cart;
 import com.example.bff.persistence.entities.User;
-import com.example.bff.persistence.enums.Role;
+import com.example.bff.persistence.enums.roles.Role;
 import com.example.bff.persistence.repositories.CartRepository;
 import com.example.bff.persistence.repositories.UserRepository;
 import lombok.AllArgsConstructor;
@@ -35,6 +35,7 @@ public class RegisterOperationIMPL implements RegisterOperation {
                 .items(new HashMap<>())
                 .totalPrice(0.0f)
                 .build();
+
         cartRepository.save(cart);
         String verCode= UUID.randomUUID().toString();
         User user= User.builder()
@@ -48,6 +49,7 @@ public class RegisterOperationIMPL implements RegisterOperation {
                 .isEmailVerified(false)
                 .verificationCode(verCode)
                 .cardBalance(0.0f)
+                .discountPoints(0)
                 .build();
         userRepository.save(user);
 
