@@ -37,7 +37,6 @@ public class CartController {
     }
     @GetMapping("/all")
     public ResponseEntity<GetItemsResponse> getAll(GetItemsRequest request){
-
         return ResponseEntity.ok(getItems.process(request));
     }
     @PostMapping("/{itemId}")

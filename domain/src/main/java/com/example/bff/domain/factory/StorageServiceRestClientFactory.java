@@ -19,6 +19,6 @@ public class StorageServiceRestClientFactory {
         return Feign.builder()
                 .encoder(new JacksonEncoder(objectMapper))
                 .decoder(new JacksonDecoder(objectMapper))
-                .target(StorageServiceRestClient.class, "http://localhost:8081");
+                .target(StorageServiceRestClient.class, "http://172.20.144.1:8081");
     }
 }

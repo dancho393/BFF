@@ -1,17 +1,13 @@
-FROM eclipse-temurin:17 AS build
-LABEL maintainer="danez7000@gmail.com"
-WORKDIR /app
-COPY . /app
+# Use the official OpenJDK image as the base image
+FROM openjdk:17
 
+# Set the working directory within the container
+WORKDIR /zoo-trade
 
-RUN apt-get update && apt-get install -y maven
+# Copy the packaged JAR file from the target directory into the container
+COPY rest/target/StorageServiceApplication.jar zoo-trade.jar
+# Expose the port that your application runs on
+EXPOSE 8082
 
-
-RUN mvn clean package
-
-FROM eclipse-temurin:17
-WORKDIR /app
-COPY --from=build /app/target/BFF-0.0.4-SNAPSHOT.jar /app/test-docker.jar
-
-
-ENTRYPOINT ["java", "-jar", "test-docker.jar"]
+# Define the command to run your application
+CMD ["java", "-jar", "zoo-trade.jar"]

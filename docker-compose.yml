@@ -1,27 +1,92 @@
 version: "3.8"
 
 services:
-  mysqldb:
-    container_name: mysqldb
-    image: mysql
+  mysql-server:
+    container_name: zoo-mysql-server
+    image: mysql:latest
+    restart: unless-stopped
+    env_file: ./.env
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: mydb
+      - MYSQL_ROOT_PASSWORD=${ZOO_DB_ROOT_PASSWORD}
+    volumes:
+      - zoo-mysql-server:/var/lib/mysql
+    ports:
+      - ${MYSQLDB_LOCAL_PORT}:${MYSQLDB_DOCKER_PORT}
+    networks :
+      - host
+
+  zoo-trade:
+    depends_on:
+      - mysql-server
+    build: ../ZooStore
+    restart: on-failure
+    env_file: ./.env
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_APPLICATION_JSON: '{
+           "spring.datasource.url"  : "jdbc:mysql://mysql-server:${MYSQLDB_DOCKER_PORT}/${ZOOTRADE_DB_DATABASE}?useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC&allowPublicKeyRetrieval=true",
+           "spring.datasource.username" : "${ZOO_DB_USER}",
+           "spring.datasource.password" : "${ZOO_DB_ROOT_PASSWORD}",
+           "spring.jpa.properties.hibernate.dialect" : "org.hibernate.dialect.MySQLDialect",
+           "spring.jpa.hibernate.ddl-auto" : "update"
+         }'
+    volumes:
+      - .m2:/root/.m2
+    stdin_open: true
+    tty: true
     networks:
-      springboot-mysql-net:
-  server:
-    container_name: springboot-rest
-    build:
-      context: ./
-      dockerfile: Dockerfile
+      - host
+
+  zoo-storage:
+    depends_on:
+      - mysql-server
+      - zoo-trade
+    build: ../StorageServiceNew
+    restart: on-failure
+    env_file: ./.env
+    ports:
+      - "8081:8081"
+    environment:
+      SPRING_APPLICATION_JSON: '{
+           "spring.datasource.url"  : "jdbc:mysql://mysql-server:${MYSQLDB_DOCKER_PORT}/${ZOOSTORAGE_DB_DATABASE}?useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC&allowPublicKeyRetrieval=true",
+           "spring.datasource.username" : "${ZOO_DB_USER}",
+           "spring.datasource.password" : "${ZOO_DB_ROOT_PASSWORD}",
+           "spring.jpa.properties.hibernate.dialect" : "org.hibernate.dialect.MySQLDialect",
+           "spring.jpa.hibernate.ddl-auto" : "update"
+         }'
+    volumes:
+      - .m2:/root/.m2
+    stdin_open: true
+    tty: true
+    networks:
+      - host
+  zoo-bff:
+    depends_on:
+      - mysql-server
+      - zoo-trade
+      - zoo-storage
+    build: ../BFF
+    restart: on-failure
+    env_file: ./.env
     ports:
       - "8082:8082"
+    environment:
+      SPRING_APPLICATION_JSON: '{
+           "spring.datasource.url"  : "jdbc:mysql://mysql-server:${MYSQLDB_DOCKER_PORT}/${ZOOBFF_DB_DATABASE}?useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC&allowPublicKeyRetrieval=true",
+           "spring.datasource.username" : "${ZOO_DB_USER}",
+           "spring.datasource.password" : "${ZOO_DB_ROOT_PASSWORD}",
+           "spring.jpa.properties.hibernate.dialect" : "org.hibernate.dialect.MySQLDialect",
+           "spring.jpa.hibernate.ddl-auto" : "update"
+         }'
+    volumes:
+      - .m2:/root/.m2
+    stdin_open: true
+    tty: true
     networks:
-      springboot-mysql-net:
-    restart: on-failure
-    depends_on:
-      - mysqldb
-
-
+      - host
 networks:
-  springboot-mysql-net:
+  host:
+    driver: bridge
+volumes:
+  zoo-mysql-server:
