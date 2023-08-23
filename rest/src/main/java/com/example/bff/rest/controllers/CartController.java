@@ -32,7 +32,7 @@ public class CartController {
     private final DeleteCartOperation deleteCart;
     private final BuyOutOperation buyOut;
     @PostMapping("/new-item")
-    public ResponseEntity<AddItemResponse> random(@RequestBody AddItemRequest request){
+    public ResponseEntity<AddItemResponse> addItem(@RequestBody AddItemRequest request){
         return ResponseEntity.ok(addItem.process(request));
     }
     @GetMapping("/all")

@@ -20,4 +20,10 @@ public class RegisterRequest implements OperationRequest {
     private String password;
     @NotBlank
     private String phoneNumber;
+    @NotBlank
+    private String country;
+    @NotBlank
+    private String city;
+    @NotBlank
+    private String continent;
 }

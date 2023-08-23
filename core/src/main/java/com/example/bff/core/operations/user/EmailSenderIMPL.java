@@ -24,7 +24,7 @@ public class EmailSenderIMPL implements EmailSenderOperation {
 
         javaMailSender.send(message);
         return EmailSenderResponse.builder()
-                .message("Verification Email Send")
+                .message("Verification Email Send \n")
                 .build();
     }
 }

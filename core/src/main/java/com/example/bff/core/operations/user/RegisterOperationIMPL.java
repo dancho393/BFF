@@ -18,6 +18,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.UUID;
 
 @Service
@@ -50,6 +51,10 @@ public class RegisterOperationIMPL implements RegisterOperation {
                 .verificationCode(verCode)
                 .cardBalance(0.0f)
                 .discountPoints(0)
+                .wishItems(new HashSet<>())
+                .city(request.getCity())
+                .country(request.getCountry())
+                .continent(request.getContinent())
                 .build();
         userRepository.save(user);
 

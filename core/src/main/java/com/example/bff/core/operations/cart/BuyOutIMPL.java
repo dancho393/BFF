@@ -30,6 +30,9 @@ public class BuyOutIMPL implements BuyOutOperation {
                 .userBalance(user.getCardBalance())
                 .totalPrice(user.getCart().getTotalPrice())
                 .discountPoints(user.getDiscountPoints())
+                .userCity(user.getCity())
+                .userCountry(user.getCountry())
+                .userContinent(user.getContinent())
                 .build();
 
         CreatePurchaseResponse createPurchaseResponse = storageServiceRestClient

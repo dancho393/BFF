@@ -7,9 +7,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Entity
 @Table(name = "users")
@@ -41,12 +39,22 @@ public class User implements UserDetails {
     private String verificationCode;
     @Column
     private Boolean isEmailVerified=false;
+    @ElementCollection
+    private Set<UUID> wishItems;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "cart_id",referencedColumnName = "id")
     private Cart cart;
     @Column
     private int discountPoints=0;
+    @Column
+    private String city;
+    @Column
+    private String country;
+    @Column
+    private String continent;
+
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

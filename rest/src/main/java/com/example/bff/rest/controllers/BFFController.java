@@ -19,6 +19,15 @@ import com.example.bff.api.operation.purchases.getall.GetAllPurchasesOperation;
 import com.example.bff.api.operation.purchases.getall.GetAllPurchasesRequest;
 import com.example.bff.api.operation.purchases.getall.GetAllPurchasesResponse;
 
+import com.example.bff.api.operation.shipment.arrival.ShipmentArrivalOperation;
+import com.example.bff.api.operation.shipment.arrival.ShipmentArrivalRequest;
+import com.example.bff.api.operation.shipment.arrival.ShipmentArrivalResponse;
+import com.example.bff.api.operation.shipment.getforpurchase.ShipmentStatusOperation;
+import com.example.bff.api.operation.shipment.getforpurchase.ShipmentStatusRequest;
+import com.example.bff.api.operation.shipment.getforpurchase.ShipmentStatusResponse;
+import com.example.bff.api.operation.shipment.take.TakeShipmentOperation;
+import com.example.bff.api.operation.shipment.take.TakeShipmentRequest;
+import com.example.bff.api.operation.shipment.take.TakeShipmentResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -36,6 +45,9 @@ public class BFFController {
     private final CreateCommentOperation createComment;
     private final GetByKeyWordOperation getByKeyWord;
     private final RecommendItemsOperation recommendItems;
+    private final ShipmentStatusOperation shipmentStatus;
+    private final ShipmentArrivalOperation shipmentArrival;
+    private final TakeShipmentOperation takeShipment;
 
     @GetMapping("/{id}")
     public ResponseEntity<GetFullItemStorageResponse> get(@PathVariable String id){
@@ -65,6 +77,18 @@ public class BFFController {
     public ResponseEntity<RecommendItemsResponse> recommendedItems(
             @RequestBody RecommendItemsRequest request){
         return ResponseEntity.ok(recommendItems.process(request));
+    }
+    @PostMapping("/shipment-status")
+    public ResponseEntity<ShipmentStatusResponse> status(@RequestBody ShipmentStatusRequest request){
+        return ResponseEntity.ok(shipmentStatus.process(request));
+    }
+    @PostMapping("/shipment-arrive")
+    public ResponseEntity<ShipmentArrivalResponse> arrive(@RequestBody ShipmentArrivalRequest request){
+        return ResponseEntity.ok(shipmentArrival.process(request));
+    }
+    @PostMapping("/shipment-take")
+    public ResponseEntity<TakeShipmentResponse> take(@RequestBody TakeShipmentRequest request){
+        return ResponseEntity.ok(takeShipment.process(request));
     }
 
 }
