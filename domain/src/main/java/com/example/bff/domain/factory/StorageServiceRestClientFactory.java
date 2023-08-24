@@ -6,6 +6,7 @@ import feign.Feign;
 import feign.jackson.JacksonDecoder;
 import feign.jackson.JacksonEncoder;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -13,12 +14,14 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @RequiredArgsConstructor
 public class StorageServiceRestClientFactory {
+    @Value("${storage.url}")
+    private String storageUrl;
     @Bean
     StorageServiceRestClient getRestExportClient() {
         final ObjectMapper objectMapper = new ObjectMapper();
         return Feign.builder()
                 .encoder(new JacksonEncoder(objectMapper))
                 .decoder(new JacksonDecoder(objectMapper))
-                .target(StorageServiceRestClient.class, "http://172.20.144.1:8081");
+                .target(StorageServiceRestClient.class, storageUrl);
     }
 }
