@@ -6,11 +6,14 @@ import com.example.bff.api.operation.comment.CreateCommentResponse;
 import com.example.bff.core.operations.exceptions.UserNotFoundException;
 import com.example.bff.persistence.entities.User;
 import com.example.bff.persistence.repositories.UserRepository;
+import com.example.zoostore.api.operations.comment.CreateCommentsRequest;
 import com.example.zoostore.restexport.ZooStoreRestClient;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+
+
 
 @Service
 @AllArgsConstructor
@@ -20,9 +23,12 @@ public class CreateCommentIMPL implements CreateCommentOperation {
     @Override
     @Transactional
     public CreateCommentResponse process(CreateCommentRequest request) {
-        User user=userRepository.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName())
+        User user=userRepository.findByEmail(SecurityContextHolder
+                        .getContext()
+                        .getAuthentication()
+                        .getName())
                 .orElseThrow(()->new UserNotFoundException("User Not Found"));
-        com.example.zoostore.api.operations.comment.CreateCommentRequest createCommentRequest= com.example.zoostore.api.operations.comment.CreateCommentRequest
+        CreateCommentsRequest createCommentRequest= CreateCommentsRequest
                 .builder()
                 .itemId(request.getItemId())
                 .comment(request.getComment())
@@ -30,9 +36,8 @@ public class CreateCommentIMPL implements CreateCommentOperation {
                 .userId(request.getUserId())
                 .build();
 
-        com.example.zoostore.api.operations.comment.CreateCommentResponse response =
+        com.example.zoostore.api.operations.comment.CreateCommentsResponse response =
                 zooStoreRestClient.createComment(createCommentRequest);
-
 
         return CreateCommentResponse.builder()
                 .fullName(user.getFirstName()+" "+user.getLastName())

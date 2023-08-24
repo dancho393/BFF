@@ -16,7 +16,10 @@ public class ChangeBalanceIMPL implements ChangeBalanceOperation {
     private final UserRepository userRepository;
     @Override
     public ChangeBalanceResponse process(ChangeBalanceRequest request) {
-        User user = userRepository.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName())
+        User user = userRepository.findByEmail(SecurityContextHolder
+                        .getContext()
+                        .getAuthentication()
+                        .getName())
                 .orElseThrow(()->new UserNotFoundException("User Not Found"));
         user.setCardBalance(user.getCardBalance()+request.getBalance());
         userRepository.save(user);

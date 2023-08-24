@@ -14,7 +14,8 @@ public class GetAllPurchasesIMPL implements GetAllPurchasesOperation {
     private final  StorageServiceRestClient storageServiceRestClient;
     @Override
     public GetAllPurchasesResponse process(GetAllPurchasesRequest request) {
-        GetAllResponse response=storageServiceRestClient.getAllPurchase(request.getPage());
+        GetAllResponse response=storageServiceRestClient.getAllPurchase(
+                request.getPage());
 
 
         return GetAllPurchasesResponse.builder()

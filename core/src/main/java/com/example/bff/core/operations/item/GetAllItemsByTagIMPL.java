@@ -21,10 +21,14 @@ public class GetAllItemsByTagIMPL implements GetAllItemsByTagOperation {
     @Override
     public GetAllItemsByTagResponse process(GetAllItemByTagRequest input) {
 
-        FindItemsByTagResponse response= zooStoreRestClient.getItemsByTag(input.getTagId().toString(),input.getPage());
+        FindItemsByTagResponse response= zooStoreRestClient.getItemsByTag(
+                input.getTagId().toString(),
+                input.getPage());
+
         List<ItemByTagRequest> items = response.getItems();
         items.parallelStream().forEach(item -> {
-            GetByItemResponse getByItemResponse = storageServiceRestClient.getStorageById(item.getId().toString());
+            GetByItemResponse getByItemResponse = storageServiceRestClient.getStorageById(
+                    item.getId().toString());
             item.setPrice(getByItemResponse.getPrice());
             item.setQuantity(getByItemResponse.getQuantity());
         });

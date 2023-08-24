@@ -29,19 +29,17 @@ public class GetItemsIMPL implements GetItemsOperation {
                 .orElseThrow(()->new UserNotFoundException("Not Found User"));
         ArrayList<GItemResponse> items =new ArrayList<>();
 
-        userEntity.getCart().getItems().entrySet()
-                .stream()
-                .forEach(entry->{
-                        GetItemResponse zooResponse=zooStoreRestClient.getItemById(entry.getKey().toString());
-                        GetByItemResponse storageResponse=storageServiceRestClient.getStorageById(entry.getKey().toString());
-                        items.add(GItemResponse.builder()
-                                        .name(zooResponse.getTitle())
-                                        .vendor(zooResponse.getVendorName())
-                                        .price(storageResponse.getPrice()* entry.getValue())
-                                        .quantity(storageResponse.getQuantity())
-                                .build());
+        userEntity.getCart().getItems().forEach((key, value) -> {
+            GetItemResponse zooResponse = zooStoreRestClient.getItemById(key.toString());
+            GetByItemResponse storageResponse = storageServiceRestClient.getStorageById(key.toString());
+            items.add(GItemResponse.builder()
+                    .name(zooResponse.getTitle())
+                    .vendor(zooResponse.getVendorName())
+                    .price(storageResponse.getPrice() * value)
+                    .quantity(storageResponse.getQuantity())
+                    .build());
 
-                });
+        });
         Float totalPrice=items.stream()
                 .map(GItemResponse::getPrice)
                 .reduce(0f,Float::sum);

@@ -26,7 +26,8 @@ public class ShowWishListIMPL implements ShowWishListOperation {
                 .orElseThrow(()->new UserNotFoundException("User Not Found"));
         Set<GetItemResponse> wishItems=new HashSet<>();
         user.getWishItems().forEach(itemId->{
-            wishItems.add(zooStoreRestClient.getItemById(itemId.toString()));
+            wishItems.add(
+                    zooStoreRestClient.getItemById(itemId.toString()));
         });
         return ShowWishListResponse.builder()
                 .withItems(wishItems)

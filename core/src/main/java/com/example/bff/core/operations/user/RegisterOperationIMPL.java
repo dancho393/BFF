@@ -30,7 +30,7 @@ public class RegisterOperationIMPL implements RegisterOperation {
     private final EmailSenderOperation emailSender;
     @Override
     public RegisterResponse process(RegisterRequest request) {
-        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();//To be Deleted and should be autowired
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         Cart cart = Cart
                 .builder()
                 .items(new HashMap<>())

@@ -23,8 +23,8 @@ public class AddItemIMPL implements AddItemOperation {
     public AddItemResponse process(AddItemRequest request) {
 
           GetByItemResponse response=  storageServiceRestClient.getStorageById(request.getItemId().toString());
-          if(response.getPrice()==0&& response.getQuantity()==0)
-           throw new UserNotFoundException("Item Not Found");
+          if(response.getPrice()==0 && response.getQuantity()==0)
+            throw new UserNotFoundException("Item Not Found");
           User userEntity=userRepository.findByEmail(SecurityContextHolder
                         .getContext()
                         .getAuthentication()

@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Configuration;
 @RequiredArgsConstructor
 public class ZooStoreRestClientFactory {
     @Value("${zoo.store.url}")
-    String zooStoreUrl;
+    private String zooStoreUrl;
 
     @Bean
     ZooStoreRestClient getRestExportClient2() {

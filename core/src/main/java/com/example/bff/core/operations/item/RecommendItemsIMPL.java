@@ -19,8 +19,7 @@ public class RecommendItemsIMPL implements RecommendItemsOperation {
     private final UserRepository userRepository;
     @Override
     public RecommendItemsResponse process(RecommendItemsRequest request) {
-      User user= userRepository
-                .findByEmail(SecurityContextHolder
+      User user= userRepository.findByEmail(SecurityContextHolder
                         .getContext()
                         .getAuthentication()
                         .getName())
@@ -28,9 +27,10 @@ public class RecommendItemsIMPL implements RecommendItemsOperation {
 
         return RecommendItemsResponse.builder()
                 .items(
-                        storageServiceRestClient.recommend(user.getId().toString(),
-                        request.getPage())
-                        .getPurchases()
+                        storageServiceRestClient.recommend(
+                                user.getId().toString(),
+                                request.getPage())
+                                .getPurchases()
                 )
                 .build();
     }

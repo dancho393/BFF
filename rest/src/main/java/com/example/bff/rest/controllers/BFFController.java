@@ -18,7 +18,6 @@ import com.example.bff.api.operation.comment.CreateCommentResponse;
 import com.example.bff.api.operation.purchases.getall.GetAllPurchasesOperation;
 import com.example.bff.api.operation.purchases.getall.GetAllPurchasesRequest;
 import com.example.bff.api.operation.purchases.getall.GetAllPurchasesResponse;
-
 import com.example.bff.api.operation.shipment.arrival.ShipmentArrivalOperation;
 import com.example.bff.api.operation.shipment.arrival.ShipmentArrivalRequest;
 import com.example.bff.api.operation.shipment.arrival.ShipmentArrivalResponse;

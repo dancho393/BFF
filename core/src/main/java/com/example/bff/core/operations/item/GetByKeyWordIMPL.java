@@ -16,7 +16,9 @@ public class GetByKeyWordIMPL implements GetByKeyWordOperation {
 
     @Override
     public GetByKeyWordResponse process(GetByKeyWordRequest request) {
-        List items= zooStoreRestClient.findByRegex(request.getKeyWord(), request.getPage()).getItems();
+        List items= zooStoreRestClient.findByRegex(
+                request.getKeyWord(),
+                request.getPage()).getItems();
         return GetByKeyWordResponse.builder()
                 .keyWord(request.getKeyWord())
                 .items(items)

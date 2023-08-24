@@ -24,7 +24,6 @@ public class RemoveItemIMPL implements RemoveItemOperation {
 
        userEntity.getCart().getItems().remove(request.getItemId());
 
-
        cartRepository.save(userEntity.getCart());
         return null;
     }
