@@ -11,5 +11,5 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class GetAllExcelResponse implements OperationResponse {
-    List list;
+    private byte[] bytes;
 }

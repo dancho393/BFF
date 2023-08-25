@@ -18,6 +18,8 @@ import com.example.bff.api.operation.comment.CreateCommentResponse;
 import com.example.bff.api.operation.purchases.getall.GetAllPurchasesOperation;
 import com.example.bff.api.operation.purchases.getall.GetAllPurchasesRequest;
 import com.example.bff.api.operation.purchases.getall.GetAllPurchasesResponse;
+import com.example.bff.api.operation.purchases.getallexcel.GetAllExcelRequest;
+import com.example.bff.api.operation.purchases.getallexcel.GetAllExcelResponse;
 import com.example.bff.api.operation.shipment.arrival.ShipmentArrivalOperation;
 import com.example.bff.api.operation.shipment.arrival.ShipmentArrivalRequest;
 import com.example.bff.api.operation.shipment.arrival.ShipmentArrivalResponse;
@@ -27,10 +29,15 @@ import com.example.bff.api.operation.shipment.getforpurchase.ShipmentStatusRespo
 import com.example.bff.api.operation.shipment.take.TakeShipmentOperation;
 import com.example.bff.api.operation.shipment.take.TakeShipmentRequest;
 import com.example.bff.api.operation.shipment.take.TakeShipmentResponse;
+import com.example.bff.core.operations.purchases.GetAllPurchaseExcelIMPL;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.UUID;
 
 @RestController
@@ -47,6 +54,7 @@ public class BFFController {
     private final ShipmentStatusOperation shipmentStatus;
     private final ShipmentArrivalOperation shipmentArrival;
     private final TakeShipmentOperation takeShipment;
+    private final GetAllPurchaseExcelIMPL getAllPurchaseExcel;
 
     @GetMapping("/{id}")
     public ResponseEntity<GetFullItemStorageResponse> get(@PathVariable String id){
@@ -88,6 +96,17 @@ public class BFFController {
     @PostMapping("/shipment-take")
     public ResponseEntity<TakeShipmentResponse> take(@RequestBody TakeShipmentRequest request){
         return ResponseEntity.ok(takeShipment.process(request));
+    }
+    @PostMapping("/excel-purchase")
+    public ResponseEntity toExcel() throws IOException {
+        GetAllExcelResponse excelResponse = getAllPurchaseExcel
+                .process(new GetAllExcelRequest()); // Call your existing process method
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+        headers.setContentDispositionFormData("attachment", "purchases.xlsx"); // Set the filename
+
+        return new ResponseEntity<>(excelResponse.getBytes(), headers, HttpStatus.OK);
     }
 
 }
